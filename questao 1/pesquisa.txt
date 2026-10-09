@@ -1,0 +1,10 @@
+ Objetivo do JavaScript no Frontend
+
+O JavaScript no Frontend é utilizado para adicionar interatividade, dinamismo e lógica de programação diretamente no navegador do usuário. Ele permite transformar páginas web estáticas em aplicações ricas e responsivas.
+
+ Principais Objetivos:
+1. Manipulação do DOM: Alterar conteúdo, estruturas e estilos em tempo real.
+2. Interatividade: Responder a cliques, movimentos do mouse, teclas e eventos de toque.
+3. Validação de Dados: Validar formulários no lado do cliente antes do envio.
+4. Requisições Assíncronas (APIs): Buscar dados de servidores sem recarregar a página (ex: Fetch API).
+5. Experiência do Usuário (UX): Controlar elementos dinâmicos como modais, abas, carrosséis e alternância de temas (modo escuro/alto contraste).

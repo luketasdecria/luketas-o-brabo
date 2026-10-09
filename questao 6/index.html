@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Nomes de Aventura</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600&display=swap');
+        .font-cinzel { font-family: 'Cinzel', serif; }
+        .font-inter { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-inter min-h-screen flex items-center justify-center p-4">
+
+    <div class="max-w-xl w-full bg-slate-900 border border-amber-500/30 rounded-2xl shadow-2xl p-6 sm:p-8 relative overflow-hidden">
+        
+        <div class="absolute -top-24 -right-24 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-amber-500/10 text-amber-400 mb-4 border border-amber-500/20 shadow-inner">
+                <i class="fa-solid fa-scroll text-2xl"></i>
+            </div>
+            <h1 class="font-cinzel text-2xl sm:text-3xl font-bold tracking-wide text-amber-400">Gerador de Avenuras</h1>
+            <p class="text-sm text-slate-400 mt-1">Descubra sua próxima grande jornada épica</p>
+        </div>
+
+        <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-6 mb-8 text-center min-h-[130px] flex flex-col items-center justify-center relative group">
+            <span class="text-xs uppercase tracking-widest text-amber-500/70 font-semibold mb-2">Título da Aventura</span>
+            <div id="resultado" class="font-cinzel text-xl sm:text-2xl font-bold text-amber-200 transition-all duration-300 transform scale-100">
+                Clique no botão abaixo para gerar uma aventura!
+            </div>
+        </div>
+
+        <d class="flex flex-col gap-4">
+            <button onclick="gerarAventura()" class="w-full bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-slate-950 font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-amber-600/20 transition-all duration-200 transform active:scale-95 flex items-center justify-center gap-2 font-cinzel text-lg tracking-wide cursor-pointer">
+                <i class="fa-solid fa-dice text-xl"></i>
+                Gerar Nova Aventura
+            </button>
+        <div class="mt-8 pt-6 border-t border-slate-800/60 text-xs text-slate-500 text-center">
+            Categorias: Ação, Local e Complemento
+        </div>
+
+    </div>
+
+    <script>
+        
+        const categorias = {
+            acao: [
+                "A Busca", 
+                "A Batalha", 
+                "O Resgate"
+            ],
+            local: [
+                "na Floresta Sombria", 
+                "no Reino Perdido", 
+                "na Montanha Misteriosa"
+            ],
+            complemento: [
+                "do Dragão", 
+                "do Tesouro Esquecido", 
+                "da Espada Ancestral"
+            ]
+        };
+
+        function sortearItem(array) {
+            const indiceAleatorio = Math.floor(Math.random() * array.length);
+            return array[indiceAleatorio];
+        }
+
+        function gerarAventura() {
+            // Seleciona uma opção aleatória de cada categoria
+            const acaoSorteada = sortearItem(categorias.acao);
+            const localSorteado = sortearItem(categorias.local);
+            const complementoSorteado = sortearItem(categorias.complemento);
+
+            const nomeAventura = `${acaoSorteada} ${localSorteado} ${complementoSorteado}`;
+
+           
+            const elementoResultado = document.getElementById("resultado");
+            elementoResultado.style.opacity = '0';
+            elementoResultado.style.transform = 'scale(0.95)';
+
+            setTimeout(() => {
+                elementoResultado.textContent = `"${nomeAventura}"`;
+                elementoResultado.style.opacity = '1';
+                elementoResultado.style.transform = 'scale(1)';
+            }, 150);
+        }
+    </script>
+</body>
+</html>

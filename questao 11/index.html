@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validação de Cadastro</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .form-container {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input {
+            padding: 8px 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .password-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .password-container input {
+            flex: 1;
+        }
+
+        .password-container button {
+            margin-left: 5px;
+            padding: 8px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            background-color: #e0e0e0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button.submit-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button.submit-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .erro {
+            color: #d9534f;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .sucesso {
+            color: #28a745;
+            font-size: 14px;
+            margin-top: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Cadastro</h2>
+        <form id="cadastroForm" onsubmit="validarFormulario(event)">
+            
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" placeholder="Digite seu nome">
+                <span id="erroNome" class="erro"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-mail:</label>
+                <input type="text" id="email" placeholder="exemplo@email.com">
+                <span id="erroEmail" class="erro"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="senha">Senha:</label>
+                <div class="password-container">
+                    <input type="password" id="senha" placeholder="Mínimo 8 caracteres">
+                    <button type="button" onclick="toggleSenha('senha', this)">Mostrar</button>
+                </div>
+                <span id="erroSenha" class="erro"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmaSenha">Confirmação de Senha:</label>
+                <div class="password-container">
+                    <input type="password" id="confirmaSenha" placeholder="Confirme sua senha">
+                    <button type="button" onclick="toggleSenha('confirmaSenha', this)">Mostrar</button>
+                </div>
+                <span id="erroConfirma" class="erro"></span>
+            </div>
+
+            <button type="submit" class="submit-btn">Cadastrar</button>
+            <p id="mensagemSucesso" class="sucesso"></p>
+        </form>
+    </div>
+
+    <script>
+        function toggleSenha(idInput, botao) {
+            const input = document.getElementById(idInput);
+            if (input.type === "password") {
+                input.type = "text";
+                botao.textContent = "Ocultar";
+            } else {
+                input.type = "password";
+                botao.textContent = "Mostrar";
+            }
+        }
+
+        function validarFormulario(event) {
+            event.preventDefault();
+
+    
+            document.getElementById("erroNome").textContent = "";
+            document.getElementById("erroEmail").textContent = "";
+            document.getElementById("erroSenha").textContent = "";
+            document.getElementById("erroConfirma").textContent = "";
+            document.getElementById("mensagemSucesso").textContent = "";
+
+            const nome = document.getElementById("nome").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const senha = document.getElementById("senha").value;
+            const confirmaSenha = document.getElementById("confirmaSenha").value;
+
+            let valido = true;
+
+            if (nome.length < 3) {
+                document.getElementById("erroNome").textContent = "O nome deve possuir ao menos 3 caracteres.";
+                valido = false;
+            }
+
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailRegex.test(email)) {
+                document.getElementById("erroEmail").textContent = "E-mail inválido.";
+                valido = false;
+            }
+            const senhaRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+            if (!senhaRegex.test(senha)) {
+                document.getElementById("erroSenha").textContent = "A senha deve ter pelo menos 8 caracteres, uma letra maiúscula, um número e um caractere especial.";
+                valido = false;
+            }
+
+
+            if (senha !== confirmaSenha) {
+                document.getElementById("erroConfirma").textContent = "As senhas não coincidem.";
+                valido = false;
+            }
+
+    
+            if (valido) {
+                document.getElementById("mensagemSucesso").textContent = "Cadastro realizado com sucesso!";
+            }
+        }
+    </script>
+
+</body>
+</html>

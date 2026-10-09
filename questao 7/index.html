@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gravity Falls - Interação com Personagens</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Creepster&family=Inter:wght@400;600&display=swap');
+        .font-gravity { font-family: 'Creepster', cursive; letter-spacing: 1px; }
+        .font-inter { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-inter min-h-screen flex items-center justify-center p-4">
+
+    <div class="max-w-md w-full bg-slate-900 border border-emerald-500/30 rounded-2xl shadow-2xl p-6 text-center relative overflow-hidden">
+        
+        <div class="absolute -top-20 -right-20 w-40 h-40 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none"></div>
+
+        <h1 class="font-gravity text-3xl sm:text-4xl text-emerald-400 mb-1 tracking-wider">Gravity Falls</h1>
+        <p class="text-xs text-slate-400 mb-6">Interaja com os mistérios da cabana!</p>
+
+        <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 mb-6 min-h-[70px] flex items-center justify-center relative shadow-inner">
+            <div class="absolute -bottom-2 w-4 h-4 bg-slate-950 border-r border-b border-slate-800 transform rotate-45"></div>
+            <p id="fala-personagem" class="text-sm font-medium text-emerald-200">
+                Passe o mouse ou clique no personagem para interagir!
+            </p>
+        </div>
+
+        <div class="flex justify-center mb-6">
+            <div class="relative group cursor-pointer inline-block">
+                <div class="absolute inset-0 bg-emerald-500/20 rounded-2xl blur-lg transition-all group-hover:bg-emerald-500/40"></div>
+                <img id="imagem-personagem" 
+                     src="https://static.wikia.nocookie.net/disney/images/e/e3/Profile_-_Dipper_Pines.png/revision/latest/thumbnail/width/360/height/360?cb=20250302171246" 
+                     alt="Dipper Pines" 
+                     class="relative w-48 h-48 object-contain transition-transform duration-200 select-none drop-shadow-xl">
+            </div>
+        </div>
+
+        <div class="mb-6">
+            <span id="nome-personagem" class="text-xs uppercase tracking-widest text-slate-400 font-bold bg-slate-800 px-3 py-1 rounded-full border border-slate-700">
+                Dipper Pines
+            </span>
+        </div>
+
+        <button onclick="trocarPersonagem()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold py-3 px-6 rounded-xl shadow-lg shadow-emerald-600/20 transition-all duration-200 transform active:scale-95 flex items-center justify-center gap-2 cursor-pointer text-sm">
+            <i class="fa-solid fa-right-left"></i>
+            Trocar Personagem
+        </button>
+
+    </div>
+
+    <script>
+        
+        const personagens = [
+            {
+                nome: "Dipper Pines",
+                imagem: "https://static.wikia.nocookie.net/disney/images/e/e3/Profile_-_Dipper_Pines.png/revision/latest/thumbnail/width/360/height/360?cb=20250302171246",
+                falas: {
+                    mouseenter: "Ei! Encontrou mais uma página do Diário?",
+                    mouseleave: "Aonde você foi? Cuidado com os gnomos na floresta!",
+                    click: "Achei uma pista importante! 🔍"
+                }
+            },
+            {
+                nome: "Mabel Pines",
+                imagem: "https://static.wikia.nocookie.net/tkoc/images/f/f0/Mabel.png/revision/latest/scale-to-width-down/1200?cb=20140728083519&path-prefix=pt-br",
+                falas: {
+                    mouseenter: "OLÁÁÁ! Quer ver meu novo suéter brilhante?",
+                    mouseleave: "Tchauzinho! Vou ali alimentar o Waddles!",
+                    click: "Uhuul! Festa de dança da Mabel! 🐷💃"
+                }
+            }
+        ];
+
+        let indiceAtual = 0;
+
+        const imgEl = document.getElementById("imagem-personagem");
+        const nomeEl = document.getElementById("nome-personagem");
+        const falaEl = document.getElementById("fala-personagem");
+
+        function trocarPersonagem() {
+            indiceAtual = (indiceAtual + 1) % personagens.length;
+            const p = personagens[indiceAtual];
+            
+            imgEl.src = p.imagem;
+            imgEl.alt = p.nome;
+            nomeEl.textContent = p.nome;
+            falaEl.textContent = `Você trocou para ${p.nome}!`;
+        }
+
+    
+        imgEl.addEventListener("mouseenter", () => {
+            falaEl.textContent = personagens[indiceAtual].falas.mouseenter;
+        });
+
+        imgEl.addEventListener("mouseleave", () => {
+            falaEl.textContent = personagens[indiceAtual].falas.mouseleave;
+        });
+
+        imgEl.addEventListener("click", () => {
+            falaEl.textContent = personagens[indiceAtual].falas.click;
+        });
+    </script>
+</body>
+</html>

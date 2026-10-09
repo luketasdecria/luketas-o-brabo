@@ -1,0 +1,18 @@
+
+const h1Elemento = document.getElementById('tituloPrincipal');
+
+const tamanhoAleatorio = Math.floor(Math.random() * (100 - 30 + 1)) + 30;
+
+function corAleatoria() {
+    const letras = '0123456789ABCDEF';
+    let cor = '#';
+    for (let i = 0; i < 6; i++) {
+        cor += letras[Math.floor(Math.random() * 16)];
+    }
+    return cor;
+}
+
+
+h1Elemento.textContent = "Título com Cor e Tamanho Aleatórios!";
+h1Elemento.style.color = corAleatoria();
+h1Elemento.style.fontSize = tamanhoAleatorio + "px";

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Modificar H1 Aleatório</title>
+</head>
+<body>
+    <h1 id="tituloPrincipal">Texto Original do Título</h1>
+
+    <script>
+        const h1Elemento = document.getElementById('tituloPrincipal');
+
+        // Gera tamanho aleatório entre 30 e 100
+        const tamanhoAleatorio = Math.floor(Math.random() * (100 - 30 + 1)) + 30;
+        
+        // Mostra o tamanho sorteado no console (aperte F12 para ver)
+        console.log("Tamanho sorteado:", tamanhoAleatorio + "px");
+
+        // Gera cor aleatória
+        const letras = '0123456789ABCDEF';
+        let cor = '#';
+        for (let i = 0; i < 6; i++) {
+            cor += letras[Math.floor(Math.random() * 16)];
+        }
+
+        // Aplica as alterações
+        h1Elemento.textContent = "Título com Tamanho e Cor Aleatórios!";
+        h1Elemento.style.color = cor;
+        h1Elemento.style.fontSize = tamanhoAleatorio + "px";
+    </script>
+</body>
+</html>
