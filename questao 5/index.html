@@ -5,29 +5,23 @@
     <title>Questão 5 - Lista Dinâmica</title>
 </head>
 <body>
-    <!-- Botão para adicionar o item -->
+    
     <button id="btnAdicionar">Adicionar Item</button>
 
-    <!-- Lista onde os itens serão inseridos -->
     <ul id="minhaLista"></ul>
 
     <script>
-        // 1. Seleciona o botão e a lista do HTML
+        
         const btnAdicionar = document.getElementById('btnAdicionar');
         const lista = document.getElementById('minhaLista');
 
-        // 2. Adiciona o listener de clique no botão
         btnAdicionar.addEventListener('click', () => {
-            // Descobre o número do elemento na lista baseado na quantidade de filhos atuais + 1
+            
             const x = lista.children.length + 1;
-
-            // 3. Cria um novo elemento <li> usando document.createElement()
             const novoItem = document.createElement('li');
 
-            // 4. Define o texto do novo item no formato exigido: "Item n° X"
             novoItem.textContent = `Item n° ${x}`;
 
-            // 5. Insere o elemento recém-criado na lista usando appendChild()
             lista.appendChild(novoItem);
         });
     </script>
